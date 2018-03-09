@@ -85,8 +85,14 @@ function priceLogger:hourChanged()
   local hoursF = minutesF * 60;
   local hoursM = g_currentMission.environment.dayTime / hoursF % 24;
   local hours = math.floor(hoursM % 24);
+  local currentDay = nil;
+  if ssEnvironment ~= nil then
+    currentDay = ssEnvironment:dayInYear(g_currentMission.environment.currentDay);
+  else
+    currentDay = g_currentMission.environment.currentDay;
+  end;
 
-  priceLogger.dateTime = dateUtil.buildDate(g_currentMission.environment.currentDay, hours, 0)
+  priceLogger.dateTime = dateUtil.buildDate(currentDay, hours, 0)
   logger:logPrices();
   --DebugUtil.printTableRecursively(g_currentMission.environment, "0", 1,10);
   --print(g_currentMission.environment.dayTime);
