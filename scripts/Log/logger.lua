@@ -6,11 +6,11 @@ logger.fileName = nil;
 function logger:logPrices()
   logger.fileName = getUserProfileAppPath() .. "modLogs" .. "/" .. getTimeSec() .. "_" .. "priceLog.log";
   logger.file = io.open(logger.fileName, "w");
-  logger.file:write("crop,price", "\n");
+  logger.file:write("datetime,crop,price", "\n");
 
   for fillT, info in pairs(priceLogger.crops) do
     if info.price ~= nil then
-      logger.file:write(info.crop .. "," .. info.price, "\n");
+      logger.file:write(priceLogger.dateTime .. "," .. info.crop .. "," .. info.price, "\n");
     end;
   end;
 
